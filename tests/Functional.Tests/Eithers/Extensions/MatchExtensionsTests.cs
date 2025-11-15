@@ -7,22 +7,22 @@ public class MatchExtensionsTests
     private readonly Either<string, int> _right = Either<string, int>.Right(1);
     private readonly Task<Either<string, int>> _rightAsync = Task.FromResult(Either<string, int>.Right(1));
 
-    private int leftCounter = 0;
-    private int rightCounter = 0;
+    private int _leftCounter = 0;
+    private int _rightCounter = 0;
     
 
-    private void IncreaseLeft(string left) => leftCounter++;
-    private void IncreaseRight(int right) => rightCounter++;
+    private void IncreaseLeft(string left) => _leftCounter++;
+    private void IncreaseRight(int right) => _rightCounter++;
     
     private Task IncreaseLeftAsync(string left)
     {
-        leftCounter++;
+        _leftCounter++;
         return Task.CompletedTask;
     }
 
     private Task IncreaseRightAsync(int right)
     {
-        rightCounter++;
+        _rightCounter++;
         return Task.CompletedTask;
     }
 
@@ -31,41 +31,41 @@ public class MatchExtensionsTests
     [Fact]
     public void Match_Should_PerformLeftAction_WhenLeft()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         _left.Match(IncreaseLeft, IncreaseRight);
-        leftCounter.ShouldBe(1);
-        rightCounter.ShouldBe(0);
+        _leftCounter.ShouldBe(1);
+        _rightCounter.ShouldBe(0);
     }
     
     [Fact]
     public void Match_Should_PerformRightAction_WhenRight()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         _right.Match(IncreaseLeft, IncreaseRight);
-        leftCounter.ShouldBe(0);
-        rightCounter.ShouldBe(1);
+        _leftCounter.ShouldBe(0);
+        _rightCounter.ShouldBe(1);
     }
     
     [Fact]
     public async Task MatchAsync_Should_PerformLeftAction_WhenLeft()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _left.MatchAsync(IncreaseLeftAsync, IncreaseRightAsync);
-        leftCounter.ShouldBe(1);
-        rightCounter.ShouldBe(0);
+        _leftCounter.ShouldBe(1);
+        _rightCounter.ShouldBe(0);
     }
     
     [Fact]
     public async Task MatchAsync_Should_PerformRightAction_WhenRight()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _right.MatchAsync(IncreaseLeftAsync, IncreaseRightAsync);
-        leftCounter.ShouldBe(0);
-        rightCounter.ShouldBe(1);
+        _leftCounter.ShouldBe(0);
+        _rightCounter.ShouldBe(1);
     }
     
     [Fact]
@@ -99,41 +99,41 @@ public class MatchExtensionsTests
     [Fact]
     public async Task Match_Should_PerformLeftAction_WhenLeftAsync()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _leftAsync.Match(IncreaseLeft, IncreaseRight);
-        leftCounter.ShouldBe(1);
-        rightCounter.ShouldBe(0);
+        _leftCounter.ShouldBe(1);
+        _rightCounter.ShouldBe(0);
     }
     
     [Fact]
     public async Task Match_Should_PerformRightAction_WhenRightAsync()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _rightAsync.Match(IncreaseLeft, IncreaseRight);
-        leftCounter.ShouldBe(0);
-        rightCounter.ShouldBe(1);
+        _leftCounter.ShouldBe(0);
+        _rightCounter.ShouldBe(1);
     }
     
     [Fact]
     public async Task MatchAsync_Should_PerformLeftAction_WhenLeftAsync()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _leftAsync.MatchAsync(IncreaseLeftAsync, IncreaseRightAsync);
-        leftCounter.ShouldBe(1);
-        rightCounter.ShouldBe(0);
+        _leftCounter.ShouldBe(1);
+        _rightCounter.ShouldBe(0);
     }
     
     [Fact]
     public async Task MatchAsync_Should_PerformRightAction_WhenRightAsync()
     {
-        leftCounter = 0;
-        rightCounter = 0;
+        _leftCounter = 0;
+        _rightCounter = 0;
         await _rightAsync.MatchAsync(IncreaseLeftAsync, IncreaseRightAsync);
-        leftCounter.ShouldBe(0);
-        rightCounter.ShouldBe(1);
+        _leftCounter.ShouldBe(0);
+        _rightCounter.ShouldBe(1);
     }
     
     [Fact]
