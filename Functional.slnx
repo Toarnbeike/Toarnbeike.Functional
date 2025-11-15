@@ -5,8 +5,12 @@
     <File Path="LICENSE" />
     <File Path="README.md" />
   </Folder>
-  <Folder Name="/src/" />
-  <Folder Name="/tests/" />
+  <Folder Name="/src/">
+    <Project Path="src/Functional/Functional.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Functional.Tests/Functional.Tests.csproj" />
+  </Folder>
   <Folder Name="/workflows/">
     <File Path=".github/workflows/build.yaml" />
   </Folder>
