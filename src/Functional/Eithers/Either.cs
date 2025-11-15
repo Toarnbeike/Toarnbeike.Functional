@@ -13,7 +13,7 @@ namespace Toarnbeike.Eithers;
 /// </summary>
 /// <typeparam name="TLeft">The type of the first possible value.</typeparam>
 /// <typeparam name="TRight">The type of the second possible value.</typeparam>
-public readonly record struct Either<TLeft, TRight>
+public class Either<TLeft, TRight>
 {
     private readonly TLeft? _left;
     private readonly TRight? _right;
@@ -46,22 +46,14 @@ public readonly record struct Either<TLeft, TRight>
     /// </summary>
     /// <param name="left">The left value to be encapsulated by the instance.</param>
     /// <returns>An <see cref="Either{TLeft, TRight}"/> instance that holds the specified left value.</returns>
-    public static Either<TLeft, TRight> Left(TLeft left)
-    {
-        ArgumentNullException.ThrowIfNull(left);
-        return new Either<TLeft, TRight>(left, default, false);
-    }
+    public static Either<TLeft, TRight> Left(TLeft left) => new(left, default, false);
 
     /// <summary>
     /// Creates a new instance of <see cref="Either{TLeft, TRight}"/> that represents a right value.
     /// </summary>
     /// <param name="right">The value to be held by the right side of the instance.</param>
     /// <returns>An <see cref="Either{TLeft, TRight}"/> containing the specified right value.</returns>
-    public static Either<TLeft, TRight> Right(TRight right)
-    {
-        ArgumentNullException.ThrowIfNull(right);
-        return new Either<TLeft, TRight>(default, right, true);
-    }
+    public static Either<TLeft, TRight> Right(TRight right) => new(default, right, true);
 
     private Either(TLeft? left, TRight? right, bool isRight)
     {
@@ -72,7 +64,7 @@ public readonly record struct Either<TLeft, TRight>
             _ => (left, right, isRight)
         };
     }
-
+    
     /// <summary>
     /// Helper method that returns the value of the left or right side of the Either.
     /// Used for internal extension methods on Either.
