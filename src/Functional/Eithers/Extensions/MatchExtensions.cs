@@ -64,9 +64,9 @@ public static class MatchExtensions
         /// <param name="onLeftAsync">The async mapping to invoke if the instance contains a left value.</param>
         /// <param name="onRightAsync">The async mapping to invoke if the instance contains a right value.</param>
         /// <returns> An instance of TOut.</returns>
-        public async Task<TOut> MatchAsync<TOut>(Func<TLeft, Task<TOut>> onLeft, Func<TRight, Task<TOut>> onRightAsync) =>
+        public async Task<TOut> MatchAsync<TOut>(Func<TLeft, Task<TOut>> onLeftAsync, Func<TRight, Task<TOut>> onRightAsync) =>
             either.IsLeft(out var left, out var right)
-                ? await onLeft(left)
+                ? await onLeftAsync(left)
                 : await onRightAsync(right);
     }
 
