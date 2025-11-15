@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/solution items/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/tests/" />
+  <Folder Name="/workflows/">
+    <File Path=".github/workflows/build.yaml" />
+  </Folder>
+</Solution>
