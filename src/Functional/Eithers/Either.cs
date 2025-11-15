@@ -41,6 +41,23 @@ public class Either<TLeft, TRight>
         return _isRight;
     }
 
+    /// <summary>
+    /// Implicitly converts a value of type <typeparamref name="TRight"/> to an <see cref="Either{TLeft, TRight}"/> instance,
+    /// where the resulting instance represents a right value.
+    /// </summary>
+    /// <param name="right">The value to be wrapped as a right value.</param>
+    /// <returns>An <see cref="Either{TLeft, TRight}"/> instance containing the specified right value.</returns>
+    public static implicit operator Either<TLeft, TRight>(TRight right) => new(default, right, true);
+
+    /// <summary>
+    /// Explicitly converts a value of type <typeparamref name="TLeft"/> to an <see cref="Either{TLeft, TRight}"/> instance,
+    /// where the resulting instance represents a left value.
+    /// </summary>
+    /// <param name="left">The value to be wrapped as a left value.</param>
+    /// <returns>An <see cref="Either{TLeft, TRight}"/> instance containing the specified left value.</returns>
+    // Operator is explicit rather than implicit to avoid ambiguity with implicit conversion from TRight with symmetric Either<TLeft, TRight>.
+    public static explicit operator Either<TLeft, TRight>(TLeft left) => new(left, default, false);
+
     internal Either(TLeft? left, TRight? right, bool isRight)
     {
         (_left, _right, _isRight) = isRight switch

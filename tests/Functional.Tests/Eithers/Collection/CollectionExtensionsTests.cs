@@ -12,14 +12,11 @@ public class CollectionExtensionsTests
 
     public CollectionExtensionsTests()
     {
-        var right1 = Either<string, int>.Right(1);
-        var right2 = Either<string, int>.Right(2);
-        var right3 = Either<string, int>.Right(3);
         var leftA =  Either<string, int>.Left("A");
         var leftB =  Either<string, int>.Left("B");
         
-        _allRights = [right1, right2, right3];
-        _mixed = [right1, right2, leftA, right3, leftB];
+        _allRights = [1, 2, 3];
+        _mixed = [1, 2, leftA, 3, leftB];
         _allLefts = [leftA, leftB];
     }
 

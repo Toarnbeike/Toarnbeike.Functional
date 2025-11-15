@@ -1,4 +1,6 @@
-﻿namespace Toarnbeike.Eithers;
+﻿using Toarnbeike.Eithers.TestExtensions;
+
+namespace Toarnbeike.Eithers;
 
 public class EitherTests
 {
@@ -52,5 +54,18 @@ public class EitherTests
     public void Either_WithNullRight_ShouldThrow_WhenIsRight()
     {
         Should.Throw<ArgumentNullException>(() => new Either<string, int?>(null, null, true));
+    }
+
+    [Fact]
+    public void Either_ShouldBe_ImplicitlyCreated_FromRight()
+    {
+        Either<string, int> either = 1;
+        either.ShouldBeRightWithValue(1);
+    }
+
+    [Fact] public void Either_ShouldBe_ExplicitlyCreated_FromLeft()
+    {
+        var either = (Either<string, int>) "message";
+        either.ShouldBeLeftWithValue("message");
     }
 }
