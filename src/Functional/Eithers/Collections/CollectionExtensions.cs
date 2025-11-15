@@ -26,6 +26,30 @@ public static class CollectionExtensions
             }
             return Either<TLeft, IEnumerable<TRight>>.Right(rights);
         }
+        
+        /// <summary>
+        /// Applies a function to each element in the collection, producing an <see cref="Either{TLeft, TRight}"/> for each element.
+        /// If any operation results in a left value, the process short-circuits and returns that left value.
+        /// Otherwise, returns a right value containing a collection of all successfully transformed results.
+        /// </summary>
+        /// <typeparam name="TLeft">The type of the left value, typically representing an error.</typeparam>
+        /// <typeparam name="TRight">The type of the right value, typically representing a successful result.</typeparam>
+        /// <param name="bindAsync">The async function to apply to each element in the collection, producing an <see cref="Either{TLeft, TRight}"/>.</param>
+        /// <returns>An <see cref="Either{TLeft, TRight}"/> where the left represents an error occurred during processing and the right contains a collection of all successful results.</returns>
+        public async Task<Either<TLeft, IEnumerable<TRight>>> TraverseAsync<TLeft, TRight>(
+            Func<TValue, Task<Either<TLeft, TRight>>> bindAsync)
+        {
+            ArgumentNullException.ThrowIfNull(collection);
+            
+            List<TRight> rights = [];
+            foreach (var value in collection)
+            {
+                var either = await bindAsync(value);
+                if (either.IsLeft(out var left, out var right)) return Either<TLeft, IEnumerable<TRight>>.Left(left);
+                rights.Add(right);
+            }
+            return Either<TLeft, IEnumerable<TRight>>.Right(rights);
+        }
     }
     
     extension<TLeft, TRight>(IEnumerable<Either<TLeft, TRight>> collection)
@@ -46,7 +70,7 @@ public static class CollectionExtensions
         /// </returns>
         // ReSharper restore InvalidXmlDocComment
         public Either<TLeft, IEnumerable<TRight>> Sequence() => collection.Traverse(static x => x);
-
+        
         /// <summary>
         /// Executes the specified action on the right values of each <see cref="Either{TLeft, TRight}"/>
         /// in the collection. If an element in the collection is a right, the action is invoked with

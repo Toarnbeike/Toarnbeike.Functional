@@ -44,7 +44,7 @@ public class CollectionExtensionsTests
     [Fact]
     public void Traverse_Should_CreateLeftValue_WhenItemIsLeft()
     {
-        var traversed = _ints.Traverse((Func<int, Either<string, int>>)Bind);
+        var traversed = _ints.Traverse(Bind);
         
         traversed.ShouldBeOfType<Either<string, IEnumerable<int>>>();
         var actual = traversed.ShouldBeLeft();
@@ -55,6 +55,33 @@ public class CollectionExtensionsTests
             value < 3 ? Either<string, int>.Right(value * 2) : Either<string, int>.Left("too high");
     }
 
+    [Fact]
+    public async Task TraverseAsync_Should_CreateRightSequence_WhenAllRight()
+    {
+        var traversed = await _ints.TraverseAsync(BindAsync);
+
+        traversed.ShouldBeOfType<Either<string, IEnumerable<int>>>();
+        var actual = traversed.ShouldBeRight();
+        actual.ShouldBe(_ints.Select(value => value * 2));
+        return;
+        
+        Task<Either<string, int>> BindAsync(int value) => Task.FromResult(Either<string, int>.Right(value * 2));
+    }
+
+    [Fact]
+    public async Task TraverseAsync_Should_CreateLeftValue_WhenItemIsLeft()
+    {
+        var traversed = await _ints.TraverseAsync(BindAsync);
+        
+        traversed.ShouldBeOfType<Either<string, IEnumerable<int>>>();
+        var actual = traversed.ShouldBeLeft();
+        actual.ShouldBe("too high");
+        return;
+        
+        Task<Either<string, int>> BindAsync(int value) => 
+            value < 3 ? Task.FromResult(Either<string, int>.Right(value * 2)) : Task.FromResult(Either<string, int>.Left("too high"));
+    }
+    
     [Fact]
     public void Sequence_Should_CreateRightSequence_WhenAllRight()
     {
