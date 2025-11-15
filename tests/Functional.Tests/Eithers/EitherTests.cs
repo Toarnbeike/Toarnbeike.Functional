@@ -1,33 +1,7 @@
-﻿using Toarnbeike.Eithers.TestExtensions;
-
-namespace Toarnbeike.Eithers;
+﻿namespace Toarnbeike.Eithers;
 
 public class EitherTests
 {
-    [Fact]
-    public void Left_Should_InstantiateAsLeft()
-    {
-        Either<string, int>.Left("message").ShouldBeLeftWithValue("message");
-    }
-
-    [Fact]
-    public void Left_Should_Throw_WhenValueIsNull()
-    {
-        Should.Throw<ArgumentNullException>(() => Either<string?, int>.Left(null));
-    }
-    
-    [Fact]
-    public void Right_Should_InstantiateAsRight()
-    {
-        Either<string, int>.Right(1).ShouldBeRightWithValue(1);
-    }
-
-    [Fact]
-    public void Right_Should_Throw_WhenValueIsNull()
-    {
-        Should.Throw<ArgumentNullException>(() => Either<string, int?>.Right(null));
-    }
-
     [Fact]
     public void IsLeft_Should_ReturnTrue_WhenLeft()
     {
@@ -66,5 +40,17 @@ public class EitherTests
     {
         Either<string, int>.Right(1).IsLeft(out _, out var right).ShouldBeFalse();
         right.ShouldBe(1);
+    }
+
+    [Fact]
+    public void Either_WithNullLeft_ShouldThrow_WhenNotIsRight()
+    {
+        Should.Throw<ArgumentNullException>(() => new Either<string?, int>(null, 0, false));
+    }
+
+    [Fact]
+    public void Either_WithNullRight_ShouldThrow_WhenIsRight()
+    {
+        Should.Throw<ArgumentNullException>(() => new Either<string, int?>(null, null, true));
     }
 }
