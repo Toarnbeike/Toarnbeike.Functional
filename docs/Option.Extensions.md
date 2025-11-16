@@ -6,24 +6,24 @@ The option extension methods are defined in the `Toarnbeike.Options.Extensions` 
 
 The following extension methods are defined:
 
-| Method                        | Description                                  |
-|-------------------------------|----------------------------------------------|
-| [`AsNullable()`](#asnullable) | Convert to nullable                          |
-| [`AsOption()`](#asoption)     | Convert from nullable                        |
-| [`Map(...)`](#map)            | Transforms the inner value                   |
-| [`Bind(...)`](#bind)          | Chain operations returning `Option<T>`       |
-| [`Check(...)`](#check)        | Filter by predicate                          |
-| [`Match(...)`](#match)        | Pattern match: Some/ None                    |
-| [`Reduce(...)`](#reduce)      | Fallback to a value if empty                 |
-| [`OrElse(...)`](#orelse)      | Return current option or fallback if `None`  |
-| [`Tap(...)`](#tap)            | Execute side-effect on value                 |
-| [`TapIfNone()`](#tapifnone)   | Execute side-effect when empty               |
+| Method                           | Description                                  |
+|----------------------------------|----------------------------------------------|
+| [`AsNullable(...)`](#asnullable) | Convert to nullable                          |
+| [`AsOption(...)`](#asoption)     | Convert from nullable                        |
+| [`Map(...)`](#map)               | Transforms the inner value                   |
+| [`Bind(...)`](#bind)             | Chain operations returning `Option<T>`       |
+| [`Check(...)`](#check)           | Filter by predicate                          |
+| [`Match(...)`](#match)           | Pattern match: Some/ None                    |
+| [`Reduce(...)`](#reduce)         | Fallback to a value if empty                 |
+| [`OrElse(...)`](#orelse)         | Return current option or fallback if `None`  |
+| [`Tap(...)`](#tap)               | Execute side-effect on value                 |
+| [`TapIfNone()`](#tapifnone)      | Execute side-effect when empty               |
 
 ---
 
 ### AsNullable
 Convert an option back to a nullable value.
-Mostly used for ORM mapping like EF Core that expect nullable values.
+Mostly used for ORM mapping like EF Core that expects nullable values.
 
 ```csharp
 public T? AsNullable<T>() where T : class {}
@@ -85,8 +85,8 @@ Check supports async overloads, both for the `predicate` function and a `Task<Op
 ### Match
 
 Match the method to generate the `TOut` depending on whether this option has a value or not.
-If the original `Option<TValue>` is a `None`, then none value is returned,
-If the original `Option<TValue>` is a `Some(TValue)`, then the some mapping is invoked.
+If the original `Option<TValue>` is a `None`, then `whenNone` mapping is invoked,
+If the original `Option<TValue>` is a `Some(TValue)`, then `whenSome` mapping is invoked.
 
 ```csharp
 public TOut Match<TOut>(Func<TIn, TOut> whenSome, Func<TOut> whenNone) {}
@@ -135,7 +135,7 @@ Tap supports async overloads, both for the `onSome` (as `Task`) and a `Task<Opti
 
 ---
 
-### TapNone
+### TapIfNone
 
 Executes the specified action if the current `Option<TValue>` is `None`.
 Returns the current `Option<TValue>` for further chaining.

@@ -43,8 +43,8 @@ The `Toarnbeike.Options.Extensions` namespace contains extension methods for `Op
 
 | Method            | Description                                  |
 |-------------------|----------------------------------------------|
-| `AsNullable()`    | Convert to nullable                          |
-| `AsOption()`      | Convert from nullable                        |
+| `AsNullable(...)` | Convert to nullable                          |
+| `AsOption(...)`   | Convert from nullable                        |
 | `Map(...)`        | Transforms the inner value                   |
 | `Bind(...)`       | Chain operations returning `Option<T>`       |
 | `Check(...)`      | Filter by predicate                          |
@@ -54,4 +54,22 @@ The `Toarnbeike.Options.Extensions` namespace contains extension methods for `Op
 | `Tap(...)`        | Execute side-effect on value                 |
 | `TapIfNone()`     | Execute side-effect when empty               |
 
-For more details regarding the extension methods, see the [Extensions details](Option.Extensions.md) readme.
+For more details regarding these methods, see the [Extensions details](Option.Extensions.md) readme.
+
+---
+
+## Collections
+The `Toarnbeike.Options.Collections` namespace contains extension methods for `IEnumerable<Option<TValue>>`:
+
+| Method          | Returns               | Description                      |
+|-----------------|-----------------------|----------------------------------|
+| `Sequence()`    | `IEnumerable<TValue>` | Filter all non-empty values      |
+| `CountValues()` | `int`                 | Count all non-empty values       |
+| `AnyValues()`   | `bool`                | Check if any value is present    |
+| `AllValues()`   | `bool`                | Check if all values are present  |
+| `FirstOrNone()` | `TValue`              | Get the first non-None value     |
+| `LastOrNone()`  | `TValue`              | Get the last non-None value      |
+
+For more details regarding these methods, see the [Collections details](Option.Collections.md) readme.
+
+---
