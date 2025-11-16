@@ -3,6 +3,7 @@
     <File Path="docs/Either.Collections.md" />
     <File Path="docs/Either.Extensions.md" />
     <File Path="docs/Either.md" />
+    <File Path="docs/Option.md" />
   </Folder>
   <Folder Name="/solution items/">
     <File Path=".gitignore" />
