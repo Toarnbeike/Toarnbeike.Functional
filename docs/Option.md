@@ -73,3 +73,48 @@ The `Toarnbeike.Options.Collections` namespace contains extension methods for `I
 For more details regarding these methods, see the [Collections details](Option.Collections.md) readme.
 
 ---
+
+## LINQ support
+
+The `Toarnbeike.Option.Linq` namespace contains extension methods for working with LINQ queries:
+- Select = Map
+- SelectMany = Bind
+
+```csharp
+Option<string> GetName(int id) =>
+    id == 1 ? "Alice" : Option.None;
+
+Option<int> GetAge(string name) =>
+    name == "Alice" ? 30 : Option.None;
+
+var result =
+    from id in SomeInt(1)
+    from name in GetName(id)
+    from age in GetAge(name)
+    select $"{name} is {age}";
+
+result.ShouldBeSomeWithValue("Alice is 30");
+```
+
+---
+
+## Test extensions
+
+The `Toarnbeike.Options.TestExtensions` namespace contains extension methods for asserting on Options.
+These extensions are compatible with any test framework. See [TestExtensions](TestExtensions.md) for more details.
+
+---
+
+## Integrations
+
+Upon expanding the library, integrations with other parts of the library will be added here.
+
+---
+
+## Best practices
+
+- Use `Option` instead of `Nullable<T>` where possible.
+- Use `Result` when additional context regarding the failure can be provided.
+- Use `Option.Try` methods when the failure can be expected.
+
+---
