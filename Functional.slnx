@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/Either.Collections.md" />
+    <File Path="docs/Either.Extensions.md" />
+    <File Path="docs/Either.md" />
+  </Folder>
   <Folder Name="/solution items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
