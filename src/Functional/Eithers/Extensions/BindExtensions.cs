@@ -1,7 +1,7 @@
 ﻿namespace Toarnbeike.Eithers.Extensions;
 
 /// <summary>
-/// Provides extension methods for working bindings.
+/// Provides extension methods for working with bindings.
 /// </summary>
 public static class BindExtensions
 {

@@ -122,7 +122,7 @@ While method chaining works well for most scenarios, C# LINQ query syntax can ma
 ## Test extensions
 
 The `Toarnbeike.Eithers.TestExtensions` namespace contains extension methods for asserting on Eithers.
-These extensions are compatible with any test framework. See [TestExtensions] for more details.
+These extensions are compatible with any test framework. See [TestExtensions](TestExtensions.md) for more details.
 
 ---
 
