@@ -39,6 +39,17 @@ public class LinqExtensionsTests
     }
 
     [Fact]
+    public void SelectMany_StopsOnNone()
+    {
+        var option =
+            from a in NoneInt()
+            from b in SomeInt(4)
+            select a + b;
+
+        option.ShouldBeNone();
+    }
+    
+    [Fact]
     public void SelectMany_StopsOnFirstNone()
     {
         var option =

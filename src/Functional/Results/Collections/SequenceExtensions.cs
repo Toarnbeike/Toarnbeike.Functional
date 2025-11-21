@@ -1,0 +1,51 @@
+namespace Toarnbeike.Results.Collections;
+
+public static class SequenceExtensions
+{
+    /// <summary>
+    /// Converts a sequence of <see cref="Result{T}"/> into a single <see cref="Result{IEnumerable}"/> using a fail-fast strategy.
+    /// </summary>
+    /// <remarks>
+    /// If any result in <paramref name="results"/> is a failure, the first failure is returned.
+    /// If all results are successful, a single successful result containing all values is returned.
+    /// </remarks>
+    /// <returns>
+    /// A <see cref="Result{IEnumerable}"/> containing all successful values or the first failure encountered.
+    /// </returns>
+    public static Result<IEnumerable<TValue>> Sequence<TValue>(this IEnumerable<Result<TValue>> results)
+    {
+        ArgumentNullException.ThrowIfNull(results);
+
+        var successfulResults = new List<TValue>();
+        foreach (var result in results)
+        {
+            if (!result.TryGetContents(out var value, out var failure))
+            {
+                return failure;
+            }
+
+            successfulResults.Add(value);
+        }
+
+        return successfulResults;
+    }
+    
+    
+    /// <summary>
+    /// Converts a sequence of <see cref="Result{T}"/> into a single <see cref="Result{IEnumerable}"/> using a fail-fast strategy.
+    /// </summary>
+    /// <remarks>
+    /// If any result in <paramref name="resultTasks"/> is a failure, the first failure is returned.
+    /// If all results are successful, a single successful result containing all values is returned.
+    /// </remarks>
+    /// <returns>
+    /// A <see cref="Result{IEnumerable}"/> containing all successful values or the first failure encountered.
+    /// </returns>
+    public static async Task<Result<IEnumerable<TValue>>> Sequence<TValue>(this IEnumerable<Task<Result<TValue>>> resultTasks)
+    {
+        ArgumentNullException.ThrowIfNull(resultTasks);
+
+        var results = await Task.WhenAll(resultTasks);
+        return results.Sequence();
+    }
+}
