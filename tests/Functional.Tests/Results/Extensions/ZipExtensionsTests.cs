@@ -1,0 +1,170 @@
+﻿using Toarnbeike.Results.TestExtensions;
+
+namespace Toarnbeike.Results.Extensions;
+/// <summary>
+/// Tests for the <see cref="ZipExtensions"/> on a <see cref="Result{T1}"/>.
+/// </summary>
+public class ZipExtensionsTests
+{
+    private readonly Result<double> _success = Result<double>.Success(1.3);
+    private readonly Result<double> _failure = Result<double>.Failure(new Failure("original", "Original failure"));
+
+    private readonly Task<Result<double>> _successTask = Task.FromResult(Result.Success(1.3));
+    private readonly Task<Result<double>> _failureTask = Task.FromResult(Result<double>.Failure(new Failure("original", "Original failure")));
+
+    private readonly Func<double, Result<int>> _secondSuccessFunc = value => (int)value;
+    private readonly Func<double, Result<int>> _secondFailureFunc = _ => Result<int>.Failure(new Failure("zip", "Zip failure"));
+    private readonly Func<double, Result<int>> _secondForbiddenFunc = _ => throw new InvalidOperationException("This function should not be called");
+    
+    private readonly Func<double, Task<Result<int>>> _secondSuccessAsyncFunc = value => Task.FromResult(Result<int>.Success((int)value));
+    private readonly Func<double, Task<Result<int>>> _secondFailureAsyncFunc = _ => Task.FromResult(Result<int>.Failure(new Failure("zip", "Zip failure")));
+    private readonly Func<double, Task<Result<int>>> _secondForbiddenAsyncFunc = _ => throw new InvalidOperationException("This function should not be called");
+
+    [Fact]
+    public void Zip_Should_ReturnTupleResult_WhenFirstResultIsSuccess_AndSecondResultIsSuccess()
+    {
+        var result = _success.Zip(_secondSuccessFunc);
+        result.ShouldBeSuccessWithValue((1.3, 1));
+    }
+
+    [Fact]
+    public void Zip_Should_ReturnSecondFailure_WhenFirstResultIsSuccess_AndSecondResultIsFailure()
+    {
+        var result = _success.Zip(_secondFailureFunc);
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public void Zip_Should_ReturnFirstFailure_WhenFirstResultIsFailure()
+    {
+        var result = _failure.Zip(_secondForbiddenFunc);
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+
+    [Fact]
+    public void Zip_Should_ReturnCustomResult_WithProjector()
+    {
+        var result = _success
+            .Zip(_secondSuccessFunc, (left, right) => (Left: left, Right: right))
+            .Map(zip => zip.Left * zip.Right);
+        result.ShouldBeSuccessWithValue(1.3);
+    }
+
+    [Fact]
+    public void Zip_Should_ReturnFirstFailure_WhenFirstResultIsFailure_WithProjector()
+    {
+        var result = _success.Zip(_secondFailureFunc, (left, right) => (Left: left, Right: right));
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public void Zip_Should_ReturnSecondFailure_WhenFirstResultIsSuccess_AndSecondResultIsFailure_WithProjector()
+    {
+        var result = _failure.Zip(_secondForbiddenFunc, (left, right) => (Left: left, Right: right));
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+    
+    [Fact]
+    public async Task ZipAsync_Should_ReturnTupleResult_WhenFirstResultIsSuccess_AndSecondResultTaskIsSuccess()
+    {
+        var result = await _success.ZipAsync(_secondSuccessAsyncFunc);
+        result.ShouldBeSuccessWithValue((1.3, 1));
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnSecondFailure_WhenFirstResultIsSuccess_AndSecondResultTaskIsFailure()
+    {
+        var result = await _success.ZipAsync(_secondFailureAsyncFunc);
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnFirstFailure_WhenFirstResultIsFailure()
+    {
+        var result = await _failure.ZipAsync(_secondForbiddenAsyncFunc);
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnCustomResult_WhenFirstResultIsSuccess_WithProjector()
+    {
+        var result = await _success
+            .ZipAsync(_secondSuccessAsyncFunc, (left, right) => (Left: left, Right: right))
+            .Map(zip => zip.Left * zip.Right);
+        result.ShouldBeSuccessWithValue(1.3);
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnSecondFailure_WhenFirstResultIsSuccess_AndSecondResultTaskIsFailure_WithProjector()
+    {
+        var result = await _success.ZipAsync(_secondFailureAsyncFunc, (left, right) => (Left: left, Right: right));
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnFirstFailure_WhenFirstResultIsFailure_WithProjector()
+    {
+        var result = await _failure.ZipAsync(_secondForbiddenAsyncFunc, (left, right) => (Left: left, Right: right));
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+    
+    [Fact]
+    public async Task Zip_Should_ReturnTupleResult_WhenFirstResultTaskIsSuccess_AndSecondResultIsSuccess()
+    {
+        var result = await _successTask.Zip(_secondSuccessFunc);
+        result.ShouldBeSuccessWithValue((1.3, 1));
+    }
+
+    [Fact]
+    public async Task Zip_Should_ReturnSecondFailure_WhenFirstResultTaskIsSuccess_AndSecondResultIsFailure()
+    {
+        var result = await _successTask.Zip(_secondFailureFunc);
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public async Task Zip_Should_ReturnFirstFailure_WhenFirstResultTaskIsFailure()
+    {
+        var result = await _failureTask.Zip(_secondForbiddenFunc);
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+
+    [Fact]
+    public async Task Zip_Should_ReturnCustomResult_WhenFirstResultTaskIsSuccess_AndSecondResultIsSuccess()
+    {
+        var result = await _successTask
+            .Zip(_secondSuccessFunc, (left, right) => (Left: left, Right: right))
+            .Map(zip => zip.Left * zip.Right);
+        result.ShouldBeSuccessWithValue(1.3);
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnTupleResult_WhenFirstResultTaskIsSuccess_AndSecondResultTaskIsSuccess()
+    {
+        var result = await _successTask.ZipAsync(_secondSuccessAsyncFunc);
+        result.ShouldBeSuccessWithValue((1.3, 1));
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnSecondFailure_WhenFirstResultTaskIsSuccess_AndSecondResultTaskIsFailure()
+    {
+        var result = await _successTask.ZipAsync(_secondFailureAsyncFunc);
+        result.ShouldBeFailureWithMessage("Zip failure");
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnFirstFailure_WhenFirstResultTaskIsFailure()
+    {
+        var result = await _failureTask.ZipAsync(_secondForbiddenAsyncFunc);
+        result.ShouldBeFailureWithMessage("Original failure");
+    }
+
+    [Fact]
+    public async Task ZipAsync_Should_ReturnCustomResult_WhenFirstResultTaskIsSuccess_AndSecondResultTaskIsSuccess()
+    {
+        var result = await _successTask
+            .ZipAsync(_secondSuccessAsyncFunc, (left, right) => (Left: left, Right: right))
+            .Map(zip => zip.Left * zip.Right);
+        result.ShouldBeSuccessWithValue(1.3);
+    }
+}

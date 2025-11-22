@@ -16,6 +16,6 @@
 	<RepositoryUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</RepositoryUrl>
 	<PackageProjectUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</PackageProjectUrl>
 	<RepositoryType>git</RepositoryType>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageReadmeFile>docs/README.md</PackageReadmeFile>
   </PropertyGroup>
 </Project>
