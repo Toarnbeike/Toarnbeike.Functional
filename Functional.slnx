@@ -6,12 +6,15 @@
     <File Path="docs/Option.Collections.md" />
     <File Path="docs/Option.Extensions.md" />
     <File Path="docs/Option.md" />
+    <File Path="docs/Result.Collections.md" />
+    <File Path="docs/Result.Extensions.md" />
+    <File Path="docs/Result.md" />
   </Folder>
   <Folder Name="/solution items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
-    <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path="LICENSE" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Functional/Functional.csproj" />
