@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Toarnbeike.Functional</RootNamespace>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="TUnit" Version="1.76.0" />
+		<PackageReference Include="Shouldly" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Functional\Functional.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Toarnbeike.Results" />
+		<Using Include="Toarnbeike.Results.Collections" />
+		<Using Include="Toarnbeike.Results.Extensions" />
+		<Using Include="Toarnbeike.Results.Failures" />
+		<Using Include="Toarnbeike.Results.Rules" />
+		<Using Include="Toarnbeike.Results.Rules.Extensions" />
+		<Using Include="Toarnbeike.Results.Validation" />
+		<Using Include="Toarnbeike.Results.Validation.Extensions" />
+		<Using Include="Toarnbeike.Optional" />
+		<Using Include="Toarnbeike.Optional.Collections" />
+		<Using Include="Toarnbeike.Optional.Extensions" />
+		<Using Include="Toarnbeike.Unions" />
+	</ItemGroup>
+</Project>

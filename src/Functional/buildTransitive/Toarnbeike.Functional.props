@@ -1,0 +1,16 @@
+<Project>
+	<ItemGroup>
+		<Using Include="Toarnbeike.Results" />
+		<Using Include="Toarnbeike.Results.Collections" />
+		<Using Include="Toarnbeike.Results.Extensions" />
+		<Using Include="Toarnbeike.Results.Failures" />
+		<Using Include="Toarnbeike.Results.Rules" />
+		<Using Include="Toarnbeike.Results.Rules.Extensions" />
+		<Using Include="Toarnbeike.Results.Validation" />
+		<Using Include="Toarnbeike.Results.Validation.Extensions" />
+		<Using Include="Toarnbeike.Optional" />
+		<Using Include="Toarnbeike.Optional.Collections" />
+		<Using Include="Toarnbeike.Optional.Extensions" />
+		<Using Include="Toarnbeike.Unions" />
+	</ItemGroup>
+</Project>
