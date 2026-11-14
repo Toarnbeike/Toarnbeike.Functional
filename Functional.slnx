@@ -1,4 +1,5 @@
 <Solution>
+  <Folder Name="/docs/" />
   <Folder Name="/solution items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />

@@ -7,7 +7,7 @@
 This package provides a **lightweight and expressive [Option (Maybe) monad](https://en.wikipedia.org/wiki/Option_type)** for explicit handling of missing values in .NET,
 building on the C# 11 feature of Unions.  
 
-An `Option<TValue>` is a C#11 `public union Option<TValue>(TValue, None)` representing a value that can either be there, or be absent, without relying on nulls. 
+Modelled as a `union Option<TValue>(TValue, None)`, an Option represents a value that can either be there, or be absent, without relying on nulls. 
 It improves code clarity and safety by making the **absence of a value explicit**, replacing null checks and exceptions with a functional approach.
 
 ## Features
@@ -37,9 +37,9 @@ Console.WriteLine($"Missing was replaced by: {newMissing.Reduce("Hello")); // Mi
 ```
 
 Key properties of working with Unions:
-- `null` values and nullable notation is replaced with `Option`.
-- Values are never consumed directly, but always using `Reduce()` or `Match()` to provide an alternative for a missing value.
-- Mapping, binding, etc. modifies the value in an `Option` state, but missing values remain `Option.None`.
+- `null` values and nullable notation is replaced with `Option` and extensions thereof.
+- Values are never consumed directly, but always using `Reduce()` or `switch` expressions to provide an alternative for a missing value.
+- Mapping, binding, etc. modifies the value when present, but missing values remain `Option.None`.
 
 For a full developer guide, see the [documentation](https://github.com/Toarnbeike/Toarnbeike.Functional/).
 
