@@ -17,6 +17,7 @@
     <Project Path="src/Options/Options.csproj" Id="21f776c9-ff48-4004-aa4c-31ae2337d8a5" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Functional.TestExtensions.Tests/Functional.TestExtensions.Tests.csproj" Id="b4dd71a8-ba5d-4a80-8df7-65509a4c019d" />
     <Project Path="tests/Functional.Tests/Functional.Tests.csproj" Id="0be919c1-5e0c-4e23-8583-9d881244c376" />
     <Project Path="tests/Options.Tests/Options.Tests.csproj" Id="9303a1d1-eeee-46c7-a5a9-e17df63cbf2c" />
   </Folder>
