@@ -1,21 +1,24 @@
 <Project>
-  <PropertyGroup>
-    <RootNamespace>Toarnbeike</RootNamespace>
-	<TargetFramework>net10.0</TargetFramework>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-    <LangVersion>preview</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net11.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
 
-  <PropertyGroup>
-	<Company>Toarnbeike</Company>
-	<Authors>Toarnbeike</Authors>
-	<Version>0.1.0</Version>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<RepositoryUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</RepositoryUrl>
-	<PackageProjectUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</PackageProjectUrl>
-	<RepositoryType>git</RepositoryType>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Company>Toarnbeike</Company>
+		<Authors>Toarnbeike</Authors>
+		<Version>0.1.0</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);S3358</NoWarn>
+	</PropertyGroup>
 </Project>

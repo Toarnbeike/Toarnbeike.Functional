@@ -1,4 +1,6 @@
-﻿namespace Toarnbeike.Optional.Extensions;
+﻿using Toarnbeike.Functional.Optional.Extensions;
+
+namespace Toarnbeike.Functional.Optional.Extensions;
 
 public static class AsResultExtensions
 {

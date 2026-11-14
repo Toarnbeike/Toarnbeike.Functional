@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<PropertyGroup>
+		<RootNamespace>Toarnbeike.Options</RootNamespace>
+		
+		<PackageId>Toarnbeike.Options</PackageId>
+		<!-- Version is managed centrally in Directory.build.props to keep versions in sync.-->
+		<Description>Functional-style Option/Maybe implementation for .NET</Description>
+		<PackageTags>toarnbeike option maybe monad functional some none collections</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="NUGET_README.md" Pack="true" PackagePath="\README.md" Visible="False"/>
+	</ItemGroup>
+
+</Project>

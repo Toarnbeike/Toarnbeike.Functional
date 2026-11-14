@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Toarnbeike.Options</RootNamespace>
+		<OutputType>Exe</OutputType>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="TUnit" Version="1.76.0" />
+		<PackageReference Include="Shouldly" Version="4.3.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Functional.TestExtensions\Functional.TestExtensions.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Toarnbeike.Functional" />
+		<Using Include="Shouldly" />
+	</ItemGroup>
+</Project>

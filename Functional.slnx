@@ -6,10 +6,13 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/Functional.TestExtensions/Functional.TestExtensions.csproj" Id="073c6d57-8159-43f0-a850-216a9d0698c7" />
     <Project Path="src/Functional/Functional.csproj" Id="352b03c8-0778-4773-9124-d2232b2ee04b" />
+    <Project Path="src/Options/Options.csproj" Id="21f776c9-ff48-4004-aa4c-31ae2337d8a5" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Functional.Tests/Functional.Tests.csproj" Id="0be919c1-5e0c-4e23-8583-9d881244c376" />
+    <Project Path="tests/Options.Tests/Options.Tests.csproj" Id="9303a1d1-eeee-46c7-a5a9-e17df63cbf2c" />
   </Folder>
   <Folder Name="/workflows/">
     <File Path=".github/workflows/build.yaml" />
