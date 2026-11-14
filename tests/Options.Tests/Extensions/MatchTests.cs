@@ -3,6 +3,7 @@
 /// <summary>
 /// Tests for the <see cref="MatchExtensions"/> class.
 /// </summary>
+[Obsolete("Will be removed in version 1.0.0. Use pattern matching instead.")]
 public class MatchTests
 {
     private readonly Option<int> _some = 1;

@@ -160,4 +160,86 @@ public class EnumerableOptionExtensionsTests
         var last = _nullableCollectionWithoutValues.LastOrNone(_throwingNullablePredicate);
         last.ShouldBeNone();
     }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_WhenExists()
+    {
+        IEnumerable<int> collection = [1];
+        var single = collection.SingleOrNone();
+        single.ShouldBe(1);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_WhenNoValues()
+    {
+        var single = _optionsWithoutValues.SingleOrNone();
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_ShouldThrow_WhenMultipleValuesExist()
+    {
+        Should.Throw<InvalidOperationException>(() => _collectionWithValues.SingleOrNone());
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_MatchingPredicate()
+    {
+        var single = _collectionWithValues.SingleOrNone(x => x == 2);
+        single.ShouldBe(2);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_WhenNoMatchingValues()
+    {
+        var single = _collectionWithValues.SingleOrNone(x => x < 0);
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_ShouldThrow_WhenMultipleMatchingValuesExist()
+    {
+        Should.Throw<InvalidOperationException>(() => _collectionWithValues.SingleOrNone(x => x < 3));
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_FromNullable_WhenExists()
+    {
+        IEnumerable<int?> collection = [null, 1, null];
+        var single = collection.SingleOrNone();
+        single.ShouldBe(1);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_FromNullable_WhenNoValues()
+    {
+        var single = _nullableCollectionWithoutValues.SingleOrNone();
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_ShouldThrow_FromNullable_WhenMultipleValuesExist()
+    {
+        Should.Throw<InvalidOperationException>(() => _nullableCollectionWithStructs.SingleOrNone());
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_FromNullable_MatchingPredicate()
+    {
+        var single = _nullableCollectionWithStructs.SingleOrNone(x => x == 2);
+        single.ShouldBe(2);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_FromNullable_WhenNoMatchingValues()
+    {
+        var single = _nullableCollectionWithStructs.SingleOrNone(x => x < 0);
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_ShouldThrow_FromNullable_WhenMultipleMatchingValuesExist()
+    {
+        Should.Throw<InvalidOperationException>(() => _nullableCollectionWithStructs.SingleOrNone(x => x < 4));
+    }
 }

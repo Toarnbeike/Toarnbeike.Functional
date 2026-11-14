@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<RootNamespace>Toarnbeike.Functional.Tests</RootNamespace>
+		<RootNamespace>Toarnbeike.Functional</RootNamespace>
 		<OutputType>Exe</OutputType>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Functional\Functional.csproj" />
+		<ProjectReference Include="..\..\src\Functional.TestExtensions\Functional.TestExtensions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,9 +25,9 @@
 		<Using Include="Toarnbeike.Results.Rules.Extensions" />
 		<Using Include="Toarnbeike.Results.Validation" />
 		<Using Include="Toarnbeike.Results.Validation.Extensions" />
-		<Using Include="Toarnbeike.Optional" />
-		<Using Include="Toarnbeike.Optional.Collections" />
-		<Using Include="Toarnbeike.Optional.Extensions" />
+		<Using Include="Toarnbeike.Options" />
+		<Using Include="Toarnbeike.Options.Collections" />
+		<Using Include="Toarnbeike.Options.Extensions" />
 		<Using Include="Toarnbeike.Unions" />
 	</ItemGroup>
 </Project>

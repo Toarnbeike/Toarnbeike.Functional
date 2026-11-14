@@ -86,6 +86,45 @@ public static class EnumerableOptionExtensions
 
             return Option.None;
         }
+
+        /// <summary>
+        /// Returns the single element of a sequence, or <c>Option.None</c> if the sequence contains no elements.
+        /// </summary>
+        public Option<TValue> SingleOrNone()
+        {
+            ArgumentNullException.ThrowIfNull(source);
+            var found = Option<TValue>.None;
+            foreach (var value in source.Where(value => value is not null))
+            {
+                if (found.IsSome)
+                {
+                    throw new InvalidOperationException("Sequence contains more than one matching element.");
+                }
+                found = value!.Value;
+            }
+            return found;
+        }
+
+        /// <summary>
+        /// Returns the single element of a sequence, or <c>Option.None</c> if the sequence contains no elements.
+        /// </summary>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        public Option<TValue> SingleOrNone(Func<TValue?, bool> predicate)
+        {
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(predicate);
+            var found = Option<TValue>.None;
+            foreach (var value in source.Where(value => value is not null && predicate(value.Value)))
+            {
+                if (found.IsSome)
+                {
+                    throw new InvalidOperationException("Sequence contains more than one matching element.");
+                }
+                found = value!.Value;
+            }
+
+            return found;
+        }
     }
 
     /// <param name="source">The <see cref="IEnumerable{T}" /> to return the first value of.</param>
@@ -170,6 +209,51 @@ public static class EnumerableOptionExtensions
             }
 
             return Option.None;
+        }
+
+        /// <summary>
+        /// Returns the single element of a sequence, or <c>Option.None</c> if the sequence contains no elements.
+        /// </summary>
+        public Option<TValue> SingleOrNone()
+        {
+            ArgumentNullException.ThrowIfNull(source);
+            var found = Option<TValue>.None;
+            foreach (var value in source)
+            {
+                if (value is not null)
+                {
+                    if (found.IsSome)
+                    {
+                        throw new InvalidOperationException("Sequence contains more than one matching element.");
+                    }
+                    found = value;
+                }
+            }
+            return found;
+        }
+
+        /// <summary>
+        /// Returns the single element of a sequence, or <c>Option.None</c> if the sequence contains no elements.
+        /// </summary>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        public Option<TValue> SingleOrNone(Func<TValue?, bool> predicate)
+        {
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(predicate);
+            var found = Option<TValue>.None;
+            foreach (var value in source)
+            {
+                if (value is not null && predicate(value))
+                {
+                    if (found.IsSome)
+                    {
+                        throw new InvalidOperationException("Sequence contains more than one matching element.");
+                    }
+                    found = value;
+                }
+            }
+
+            return found;
         }
     }
 }

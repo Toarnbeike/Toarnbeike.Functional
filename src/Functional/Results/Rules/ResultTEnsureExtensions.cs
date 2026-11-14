@@ -9,7 +9,7 @@ public static class ResultEnsureExtensions
         public RuleTarget<Option<T>, T> EnsureSome<T>(
             Func<Option<T>> valueSelector,
             string? propertyName = null,
-            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where T : notnull
         {
             ArgumentNullException.ThrowIfNull(valueSelector);
             propertyName ??= ExpressionHelpers.ExtractPropertyName(expression);
@@ -51,7 +51,7 @@ public static class ResultEnsureExtensions
         public RuleTarget<Option<T>, T> EnsureWhenSome<T>(
             Func<Option<T>> valueSelector,
             string? propertyName = null,
-            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where T : notnull
         {
             ArgumentNullException.ThrowIfNull(valueSelector);
             propertyName ??= ExpressionHelpers.ExtractPropertyName(expression);
@@ -96,7 +96,7 @@ public static class ResultEnsureExtensions
         public async Task<RuleTarget<Option<T>, T>> EnsureSomeAsync<T>(
             Func<Option<T>> valueSelector,
             string? propertyName = null,
-            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where T : notnull
         {
             var result = await resultTask.ConfigureAwait(false);
             return result.EnsureSome(valueSelector, propertyName, expression);
@@ -105,7 +105,7 @@ public static class ResultEnsureExtensions
         public async Task<RuleTarget<Option<T>, T>> EnsureWhenSomeAsync<T>(
             Func<Option<T>> valueSelector,
             string? propertyName = null,
-            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where T : notnull
         {
             var result = await resultTask.ConfigureAwait(false);
             return result.EnsureWhenSome(valueSelector, propertyName, expression);
@@ -120,7 +120,7 @@ public static class ResultTEnsureExtensions
 {
     /// <param name="optionResult">The result containing an option to validate.</param>
     /// <typeparam name="T">The type of the value contained in the result.</typeparam>
-    extension<T>(Result<Option<T>> optionResult)
+    extension<T>(Result<Option<T>> optionResult) where T : notnull
     {
         /// <summary>
         /// Creates an ensure target for the current value that verifies that the option has a value.
@@ -221,7 +221,7 @@ public static class ResultTEnsureExtensions
         public RuleTarget<T, TProperty> EnsureSome<TProperty>(
             Func<T, Option<TProperty>> valueSelector,
             string? propertyName = null,
-            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+            [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where TProperty : notnull
         {
             ArgumentNullException.ThrowIfNull(valueSelector);
             propertyName ??= ExpressionHelpers.ExtractPropertyName(expression);
@@ -274,7 +274,7 @@ public static class ResultTEnsureExtensions
         public RuleTarget<T, TProperty> EnsureWhenSome<TProperty>(
                 Func<T, Option<TProperty>> valueSelector,
                 string? propertyName = null,
-                [CallerArgumentExpression(nameof(valueSelector))] string? expression = null)
+                [CallerArgumentExpression(nameof(valueSelector))] string? expression = null) where TProperty : notnull
         {
             ArgumentNullException.ThrowIfNull(valueSelector);
             propertyName ??= ExpressionHelpers.ExtractPropertyName(expression);

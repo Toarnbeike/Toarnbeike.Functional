@@ -61,11 +61,3 @@ public readonly union Option<TValue>(TValue, None) where TValue : notnull
 
     public static implicit operator Option<TValue>(Option<None> _) => None;
 }
-
-public static class Option
-{
-    public static Option<None> None => Option<None>.None;
-
-    public static Option<TValue> Some<TValue>(TValue value) where TValue : notnull 
-        => Option<TValue>.Some(value);
-}

@@ -131,6 +131,23 @@ public static class CollectionExtensions
             return source.LastOrDefault(option => SomePredicate(option, predicate), Option.None);
         }
 
+        /// <summary>
+        /// Returns the single occurence of a value in the sequence, or <c>Option.None</c> if the sequence contains no elements.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown if the sequence contains more than one element.</exception>
+        public Option<TValue> SingleOrNone() =>
+            source.SingleOrDefault(option => option.IsSome, Option.None);
+
+        /// <summary>
+        /// Returns the single occurence of a value in the sequence, or <c>Option.None</c> if the sequence contains no elements matching the predicate.
+        /// </summary>
+        public Option<TValue> SingleOrNone(Func<TValue, bool> predicate)
+        {
+            ArgumentNullException.ThrowIfNull(predicate);
+
+            return source.SingleOrDefault(option => SomePredicate(option, predicate), Option.None);
+        }
+
         private IEnumerable<TValue> WhereInternal(Func<TValue, bool> predicate)
         {
             foreach (var option in source)

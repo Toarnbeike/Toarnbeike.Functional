@@ -9,9 +9,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Toarnbeike.Optional" Version="2.1.0" />
 		<PackageReference Include="Toarnbeike.Results.Validation" Version="3.0.0-beta.2" />
 		<PackageReference Include="Toarnbeike.Unions" Version="2.0.0-beta.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Options\Options.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -23,9 +26,9 @@
 		<Using Include="Toarnbeike.Results.Rules.Extensions" />
 		<Using Include="Toarnbeike.Results.Validation" />
 		<Using Include="Toarnbeike.Results.Validation.Extensions" />
-		<Using Include="Toarnbeike.Optional" />
-		<Using Include="Toarnbeike.Optional.Collections" />
-		<Using Include="Toarnbeike.Optional.Extensions" />
+		<Using Include="Toarnbeike.Options" />
+		<Using Include="Toarnbeike.Options.Collections" />
+		<Using Include="Toarnbeike.Options.Extensions" />
 		<Using Include="Toarnbeike.Unions" />
 	</ItemGroup>
 </Project>

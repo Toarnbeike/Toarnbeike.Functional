@@ -248,4 +248,50 @@ public class CollectionExtensionsTests
         var last = _optionsWithoutValues.LastOrNone(_throwingPredicate);
         last.ShouldBeNone();
     }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_WhenExists()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, 2, Option.None];
+        var single = collection.SingleOrNone();
+        single.ShouldBeSome().ShouldBe(2);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_WhenNoValues()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, Option.None];
+        var single = collection.SingleOrNone();
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_Should_Throw_WhenMultipleValuesExist()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, 2, 3];
+        Should.Throw<InvalidOperationException>(() => collection.SingleOrNone());
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnSingleValue_MatchingPredicate()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, 2, Option.None, 4];
+        var single = collection.SingleOrNone(x => x == 2);
+        single.ShouldBeSome().ShouldBe(2);
+    }
+
+    [Test]
+    public void SingleOrNone_Should_ReturnNone_WhenNoValuesMatchPredicate()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, 2, Option.None, 4];
+        var single = collection.SingleOrNone(x => x == 3);
+        single.ShouldBeNone();
+    }
+
+    [Test]
+    public void SingleOrNone_Should_Throw_WhenMultipleValuesMatchPredicate()
+    {
+        IEnumerable<Option<int>> collection = [Option.None, 2, Option.None, 4];
+        Should.Throw<InvalidOperationException>(() => collection.SingleOrNone(x => x > 1));
+    }
 }

@@ -11,7 +11,7 @@ public static class AsOptionExtensions
     /// <typeparam name="T">The type of the value.</typeparam>
     /// <param name="result">The result to convert.</param>
     /// <returns>An <see cref="Option{T}"/> containing the value when available; otherwise, <see cref="Option.None"/>.</returns>
-    public static Option<T> AsOption<T>(this Result<T> result) =>
+    public static Option<T> AsOption<T>(this Result<T?> result) where T : notnull =>
         result.TryGetValue(out var value) ? value : Option.None;
 
     /// <summary>
@@ -21,6 +21,6 @@ public static class AsOptionExtensions
     /// <typeparam name="T">The type of the value.</typeparam>
     /// <param name="resultTask">The task containing the result to convert.</param>
     /// <returns>A task containing an <see cref="Option{T}"/> with the value when available; otherwise, <see cref="Option.None"/>.</returns>
-    public static Task<Option<T>> AsOptionAsync<T>(this Task<Result<T>> resultTask) =>
+    public static Task<Option<T>> AsOptionAsync<T>(this Task<Result<T?>> resultTask) where T : notnull =>
         resultTask.ContinueWith(task => task.Result.AsOption());
 }

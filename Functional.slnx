@@ -1,5 +1,10 @@
 <Solution>
-  <Folder Name="/docs/" />
+  <Folder Name="/docs/">
+    <File Path="docs/Options.Collections.md" />
+    <File Path="docs/Options.Extensions.md" />
+    <File Path="docs/Options.Linq.md" />
+    <File Path="docs/Options.md" />
+  </Folder>
   <Folder Name="/solution items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />

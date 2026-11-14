@@ -1,6 +1,4 @@
-﻿using Toarnbeike.Functional.Optional.Extensions;
-
-namespace Toarnbeike.Functional.Optional.Extensions;
+﻿namespace Toarnbeike.Functional.Options.Extensions;
 
 public static class AsResultExtensions
 {
@@ -12,8 +10,11 @@ public static class AsResultExtensions
     /// <param name="option">The option to convert.</param>
     /// <param name="failureFactory">Creates the failure to use when the option has no value.</param>
     /// <returns>A successful result containing the option value when present; otherwise a failed result created by <paramref name="failureFactory"/>.</returns>
-    public static Result<T> AsResult<T>(this Option<T> option, Func<Failure> failureFactory) =>
-        option.TryGetValue(out var value) ? value : failureFactory();
+    public static Result<T> AsResult<T>(this Option<T> option, Func<Failure> failureFactory) where T : notnull => option switch
+    {
+        T value => Result<T>.Success(value),
+        None => Result<T>.Failure(failureFactory())
+    };
 
     /// <summary>
     /// Converts an asynchronous <see cref="Option{T}"/> to a <see cref="Result{T}"/>.
@@ -23,6 +24,6 @@ public static class AsResultExtensions
     /// <param name="optionTask">The task containing the option to convert.</param>
     /// <param name="failureFactory">Creates the failure to use when the option has no value.</param>
     /// <returns>A successful result containing the option value when present; otherwise a failed result created by <paramref name="failureFactory"/>.</returns>
-    public static Task<Result<T>> AsResultAsync<T>(this Task<Option<T>> optionTask, Func<Failure> failureFactory) =>
+    public static Task<Result<T>> AsResultAsync<T>(this Task<Option<T>> optionTask, Func<Failure> failureFactory) where T : notnull =>
         optionTask.ContinueWith(task => task.Result.AsResult(failureFactory));
 }

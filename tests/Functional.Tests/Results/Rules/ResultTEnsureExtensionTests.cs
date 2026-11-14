@@ -1,9 +1,10 @@
 ﻿using Shouldly;
 using Toarnbeike.Functional.Results.Rules;
-using Toarnbeike.Optional.TestExtensions;
 using Toarnbeike.Results.TestExtensions;
+using Toarnbeike.Options;
+using Toarnbeike.Functional.TestExtensions;
 
-namespace Toarnbeike.Functional.Tests.Results.Rules;
+namespace Toarnbeike.Functional.Results.Rules;
 
 public class ResultEnsureExtensionTests
 {
@@ -112,7 +113,7 @@ public class ResultTEnsureExtensionTests_WithValueSelector
     private record NestedOption(Option<int> InnerValue)
     {
         public static NestedOption Some => new(Option.Some(42));
-        public static NestedOption None => new(Option<int>.None());
+        public static NestedOption None => new(Option<int>.None);
     }
 
     [Test]
@@ -240,7 +241,7 @@ public class ResultTEnsureExtensionTests_WithPropertyName
     [Test]
     public void EnsureSome_WithNoneValue_ReturnsFailure()
     {
-        var input = Result.Success(Option<int>.None());
+        var input = Result.Success(Option<int>.None);
         var result = input.EnsureSome("TestProperty").AtLeast(40);
 
         result.ShouldBeFailure();
@@ -288,7 +289,7 @@ public class ResultTEnsureExtensionTests_WithPropertyName
     [Test]
     public void EnsureWhenSome_WithNoneValue_ReturnsSuccess()
     {
-        var input = Result.Success(Option<int>.None());
+        var input = Result.Success(Option<int>.None);
         var result = input.EnsureWhenSome("TestProperty").AtLeast(40);
 
         result.ShouldBe(input);

@@ -17,12 +17,11 @@ public static class OptionTestExtensions
         /// <param name="message">Optional custom failure message.</param>
         /// <returns>The inner value if present.</returns>
         /// <exception cref="AssertionFailedException">Thrown if the Option is None.</exception>
-        public TValue ShouldBeSome(string? message = null)
+        public TValue ShouldBeSome(string? message = null) => option switch
         {
-            return option.TryGetValue(out var value)
-                ? value
-                : throw new AssertionFailedException(message ?? $"Expected Option<{typeof(TValue).Name}> to be Some, but it was None.");
-        }
+            TValue value => value,
+            None => throw new AssertionFailedException(message ?? $"Expected Option<{typeof(TValue).Name}> to be Some, but it was None.")
+        };
 
         /// <summary>
         /// Asserts that the option is None; throws an exception if it is Some.
@@ -31,10 +30,11 @@ public static class OptionTestExtensions
         /// <exception cref="AssertionFailedException">Thrown if the Option is Some.</exception>
         public void ShouldBeNone(string? message = null)
         {
-            if (option.TryGetValue(out var value))
+            var _ = option switch
             {
-                throw new AssertionFailedException(message ?? $"Expected Option<{typeof(TValue).Name}> to be None, but it was Some with value {value}.");
-            }
+                TValue value => throw new AssertionFailedException(message ?? $"Expected Option<{typeof(TValue).Name}> to be None, but it was Some with value {value}."),
+                None => true
+            };
         }
     }
 }

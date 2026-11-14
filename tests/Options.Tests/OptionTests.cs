@@ -90,4 +90,28 @@ public class OptionTests
         option.IsNone.ShouldBeTrue();
         option.TryGetValue(out var _).ShouldBeFalse();
     }
+
+    [Test]
+    public void Some_Should_PatternMatchInSwitchExpression()
+    {
+        Option<string> option = _testValue;
+        var result = option switch
+        {
+            string value => $"Option had value: {value}",
+            None => "Option was None"
+        };
+        result.ShouldBe($"Option had value: {_testValue}");
+    }
+
+    [Test]
+    public void None_Should_PatternMatchInSwitchExpression()
+    {
+        Option<string> option = Option.None;
+        var result = option switch
+        {
+            string value => $"Option had value: {value}",
+            None => "Option was None"
+        };
+        result.ShouldBe("Option was None");
+    }
 }

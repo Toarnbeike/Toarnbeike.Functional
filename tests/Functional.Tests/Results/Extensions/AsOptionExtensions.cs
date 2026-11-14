@@ -1,8 +1,7 @@
 ﻿using Shouldly;
-using Toarnbeike.Functional.Results.Extensions;
-using Toarnbeike.Optional.TestExtensions;
+using Toarnbeike.Functional.TestExtensions;
 
-namespace Toarnbeike.Functional.Tests.Results.Extensions;
+namespace Toarnbeike.Functional.Results.Extensions;
 
 public class AsOptionExtensions
 {

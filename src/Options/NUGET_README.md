@@ -15,7 +15,7 @@ It improves code clarity and safety by making the **absence of a value explicit*
 - **Explicit missing value handling** Avoid using nulls for missing values; make absent a meaningful feature.
 - **Fluent extension methods:** Compose operations with `Bind`, `Map`, `Tap`, `Reduce`, and more.
 - **Fluent collection extensions:** Handle collections with missing values using `WhereValues`, `SelectValues`, `FirstOrNone` and more.
-* **Seamless async support:** Works naturally with Task and async pipelines.
+- **Seamless async support:** Works naturally with Task and async pipelines.
 - **Functional programming inspired:** Inspired by FP principles for predictable, readable, and maintainable error handling.
  
 ## Quick start
@@ -41,6 +41,6 @@ Key properties of working with Unions:
 - Values are never consumed directly, but always using `Reduce()` or `switch` expressions to provide an alternative for a missing value.
 - Mapping, binding, etc. modifies the value when present, but missing values remain `Option.None`.
 
-For a full developer guide, see the [documentation](https://github.com/Toarnbeike/Toarnbeike.Functional/).
+For a full developer guide, see the [documentation](../../docs/Options.md).
 
 ---

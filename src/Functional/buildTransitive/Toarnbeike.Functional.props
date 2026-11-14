@@ -8,9 +8,9 @@
 		<Using Include="Toarnbeike.Results.Rules.Extensions" />
 		<Using Include="Toarnbeike.Results.Validation" />
 		<Using Include="Toarnbeike.Results.Validation.Extensions" />
-		<Using Include="Toarnbeike.Optional" />
-		<Using Include="Toarnbeike.Optional.Collections" />
-		<Using Include="Toarnbeike.Optional.Extensions" />
+		<Using Include="Toarnbeike.Options" />
+		<Using Include="Toarnbeike.Options.Collections" />
+		<Using Include="Toarnbeike.Options.Extensions" />
 		<Using Include="Toarnbeike.Unions" />
 	</ItemGroup>
 </Project>

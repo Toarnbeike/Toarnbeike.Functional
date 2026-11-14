@@ -1,8 +1,6 @@
 ﻿namespace Toarnbeike.Options.Extensions;
 
-/// <summary>
-/// Think carefully whether Match should still exist, now that pattern matching is more powerful.
-/// </summary>
+[Obsolete("Will be removed in version 1.0.0. Use pattern matching instead.")]
 public static class MatchExtensions
 {
     /// <param name="option">this option to work on.</param>
