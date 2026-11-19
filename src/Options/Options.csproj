@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<RootNamespace>Toarnbeike.Options</RootNamespace>
 		
-		<PackageId>Toarnbeike.Options</PackageId>
+		<PackageId>Toarnbeike.Functional.Options</PackageId>
 		<!-- Version is managed centrally in Directory.build.props to keep versions in sync.-->
 		<Description>Functional-style Option/Maybe implementation for .NET</Description>
 		<PackageTags>toarnbeike option maybe monad functional some none collections</PackageTags>

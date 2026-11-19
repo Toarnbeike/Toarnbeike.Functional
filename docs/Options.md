@@ -149,3 +149,5 @@ See the [LINQ extensions docs](Options.Linq.md) for details and examples.
 
 > Nulls are dangerous and exceptions are control-flow.
 > Options make illegal states unrepresentable.
+
+---

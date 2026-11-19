@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Toarnbeike.Results</RootNamespace>
+
+		<PackageId>Toarnbeike.Functional.Results</PackageId>
+		<!-- Version is managed centrally in Directory.build.props to keep versions in sync.-->
+		<Description>Functional-style Result implementation for .NET</Description>
+		<PackageTags>result monad functional success failure railroad rop async</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="NUGET_README.md" Pack="true" PackagePath="\README.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Results.Tests" />
+	</ItemGroup>
+</Project>

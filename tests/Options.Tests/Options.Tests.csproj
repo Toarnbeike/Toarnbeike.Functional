@@ -16,7 +16,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Using Include="Toarnbeike.Functional" />
 		<Using Include="Shouldly" />
 	</ItemGroup>
 </Project>

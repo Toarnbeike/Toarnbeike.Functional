@@ -16,9 +16,10 @@
 		<PackageProjectUrl>https://github.com/Toarnbeike/Toarnbeike.Functional</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>Copyright (c) Toarnbeike. All rights reserved.</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);S3358</NoWarn>
+		<NoWarn>$(NoWarn);S3060;S3358</NoWarn>
 	</PropertyGroup>
 </Project>

@@ -1,0 +1,84 @@
+﻿using Toarnbeike.Functional.TestExtensions;
+
+namespace Toarnbeike.Results.Extensions;
+
+/// <summary>
+/// Tests for the <see cref="TapFailureExtensions"/> on a <see cref="Result{TValue}"/>.
+/// </summary>
+public class TapFailureTValueTests
+{
+    private readonly Result<int> _success = Result.Success(42);
+    private readonly Result<int> _failure = new TestFailure("original");
+
+    private readonly Task<Result<int>> _successTask, _failureTask;
+
+    public TapFailureTValueTests()
+    {
+        _successTask = Task.FromResult(_success);
+        _failureTask = Task.FromResult(_failure);
+    }
+
+    [Test]
+    public void TapFailure_ShouldNotExecute_WhenResultIsSuccess()
+    {
+        var failureMessage = string.Empty;
+        _success.TapFailure(failure => failureMessage = failure.Message);
+        failureMessage.ShouldBeEmpty();
+    }
+
+    [Test]
+    public void TapFailure_ShouldExecute_WhenResultIsFailure()
+    {
+        var failureMessage = string.Empty;
+        _failure.TapFailure(failure => failureMessage = failure.Message);
+        failureMessage.ShouldBe("original");
+    }
+
+    [Test]
+    public async Task TapFailureAsync_ShouldNotExecute_WhenResultIsSuccess()
+    {
+        var failureMessage = string.Empty;
+        await _success.TapFailureAsync(async failure => await Task.Run(() => failureMessage = failure.Message));
+        failureMessage.ShouldBeEmpty();
+    }
+
+    [Test]
+    public async Task TapFailureAsync_ShouldExecute_WhenResultIsFailure()
+    {
+        var failureMessage = string.Empty;
+        await _failure.TapFailureAsync(async failure => await Task.Run(() => failureMessage = failure.Message));
+        failureMessage.ShouldBe("original");
+    }
+
+    [Test]
+    public async Task TapFailure_ShouldNotExecute_WhenResultTaskIsSuccess()
+    {
+        var failureMessage = string.Empty;
+        await _successTask.TapFailure(failure => failureMessage = failure.Message);
+        failureMessage.ShouldBeEmpty();
+    }
+
+    [Test]
+    public async Task TapFailure_ShouldExecute_WhenResultTaskIsFailure()
+    {
+        var failureMessage = string.Empty;
+        await _failureTask.TapFailure(failure => failureMessage = failure.Message);
+        failureMessage.ShouldBe("original");
+    }
+
+    [Test]
+    public async Task TapFailureAsync_ShouldNotExecute_WhenResultTaskIsSuccess()
+    {
+        var failureMessage = string.Empty;
+        await _successTask.TapFailureAsync(async failure => await Task.Run(() => failureMessage = failure.Message));
+        failureMessage.ShouldBeEmpty();
+    }
+
+    [Test]
+    public async Task TapFailureAsync_ShouldExecute_WhenResultTaskIsFailure()
+    {
+        var failureMessage = string.Empty;
+        await _failureTask.TapFailureAsync(async failure => await Task.Run(() => failureMessage = failure.Message));
+        failureMessage.ShouldBe("original");
+    }
+}

@@ -15,11 +15,15 @@
     <Project Path="src/Functional.TestExtensions/Functional.TestExtensions.csproj" Id="073c6d57-8159-43f0-a850-216a9d0698c7" />
     <Project Path="src/Functional/Functional.csproj" Id="352b03c8-0778-4773-9124-d2232b2ee04b" />
     <Project Path="src/Options/Options.csproj" Id="21f776c9-ff48-4004-aa4c-31ae2337d8a5" />
+    <Project Path="src/Results.Checks/Results.Checks.csproj" Id="d2486e2d-1266-46f2-a489-81e5c840a29e" />
+    <Project Path="src/Results/Results.csproj" Id="d0e859a7-4a99-491c-8578-e234d88ede3b" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Functional.TestExtensions.Tests/Functional.TestExtensions.Tests.csproj" Id="b4dd71a8-ba5d-4a80-8df7-65509a4c019d" />
     <Project Path="tests/Functional.Tests/Functional.Tests.csproj" Id="0be919c1-5e0c-4e23-8583-9d881244c376" />
     <Project Path="tests/Options.Tests/Options.Tests.csproj" Id="9303a1d1-eeee-46c7-a5a9-e17df63cbf2c" />
+    <Project Path="tests/Results.Checks.Tests/Results.Checks.Tests.csproj" Id="2698d949-13c4-441b-85ad-a8bafabd6dda" />
+    <Project Path="tests/Results.Tests/Results.Tests.csproj" Id="8cb00596-628f-4175-a0d9-f4a5f0f21768" />
   </Folder>
   <Folder Name="/workflows/">
     <File Path=".github/workflows/build.yaml" />

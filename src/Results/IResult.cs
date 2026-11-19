@@ -1,0 +1,31 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Toarnbeike.Results;
+
+/// <summary>
+/// Represents the outcome of an operation, which can either be a success or a failure.
+/// </summary>
+/// <remarks>
+/// Check if this interface still adds value, as with union types, the logic might have shifted to the union itself. 
+/// However, this interface can still be useful for polymorphism and for creating collections of results.
+/// If the operation failed, the failure reason can be retrieved via <see cref="TryGetFailure(out Failure)"/>.
+/// </remarks>
+public interface IResult
+{
+    /// <summary>
+    /// Gets a value indicating whether the result represents a successful outcome.
+    /// </summary>
+    bool IsSuccess { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the result represents a failure.
+    /// </summary>
+    bool IsFailure { get; }
+
+    /// <summary>
+    /// Attempts to retrieve the reason why to operation failed.
+    /// </summary>
+    /// <param name="failure">When this method returns, contains the reason if the result is a failure; otherwise, <c>null</c>.</param>
+    /// <returns><c>true</c> if the result is a failure; otherwise, <c>false</c>.</returns>
+    bool TryGetFailure([NotNullWhen(true)] out Failure? failure);
+}

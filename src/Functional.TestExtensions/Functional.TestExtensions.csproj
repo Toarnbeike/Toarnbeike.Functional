@@ -6,6 +6,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Options\Options.csproj" />
+	  <ProjectReference Include="..\Results\Results.csproj" />
 	</ItemGroup>
 
 </Project>
